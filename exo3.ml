@@ -71,7 +71,7 @@ and best_option_bis = function
 and max a b = if a<b then a else b 
 
 
-(*  question 3.8 %%% change avec c not sure a cause de c das 3.7 *)
+(*  question 3.8 *)
 let rec sums = function
 | [] -> failwith "grille vide"
 | c::g -> (sums_bis c g)
@@ -97,4 +97,4 @@ let solve g = wf_grid_exn g; (max_list (sums g))
 
 (* tests*)
 
-(* les test a la fin *)
+(* les test a la fin %%% faire des teste pour les cas limites *)
