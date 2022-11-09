@@ -65,17 +65,17 @@ in rotate_down_bis [] l
 
 
 (* question 3.7 *)
+
 let rec best_option l = 
-  let ld = rotate_down l in match ld with 
-  | [] | [_] -> ld 
-  | a::b::[] -> let maxall = max a b in [maxall;maxall]
-  | a::b::c::_ -> best_option_bis a b ld
-and best_option_bis hd hdd= function
-| [] -> [] 
-| [a] -> [(max (max a hd) hdd )]
-| a::b::[] -> ((max (max a b) hd )::(best_option_bis hd hdd ([b])) )
-| a::b::c::ldd -> ((max (max a b) c )::(best_option_bis hd hdd (b::c::ldd)) )
-and max a b = if a<b then b else a
+  let ld = rotate_down l in 
+  let lu = rotate_up l in 
+  get_besto (l,ld,lu) 
+and get_besto = function
+| (a::ll,u::luu,d::ldd) -> ( max a (max u d))::get_besto (ll,luu,ldd)
+| _ -> []
+
+
+
 
 
 
