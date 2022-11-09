@@ -39,15 +39,6 @@ let rec somme_derniers l1 l2 = match l1 with
 
 *)
 
-(* si on considere que x prend des int, sinon code ci-dessous *)
-(* let x a b = a + b
-let f y z = 
-  let v = y + 5 in 
-  if (z > y) then begin 
-    printf "%d\n" z ; 
-    z
-  end 
-  else (x v 0) *)
 
 
 let x a b = a +. b
@@ -58,6 +49,17 @@ let f y z =
     z
   end 
   else (x v 0.)
+
+(* et si on considere que x prend des int, sinon code ci-dessus *)
+(* let x a b = a + b
+let f y z = 
+  let v = y + 5 in 
+  if (z > y) then begin 
+    printf "%d\n" z ; 
+    z
+  end 
+  else (x v 0) *)
+
 
 
 

@@ -22,7 +22,7 @@ let f1 (x , y ) z =
 
 
 (*question 2.2*)
-(*  %%%ocamlpro 
+(* 
   list_sum : prend une liste et renvoi le nombre d'element qui respect la contrainte  p 
   list_or : prend une liste de bool et renvoi true si la liste a au moins un element true 
   - leur type: 
