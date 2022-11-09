@@ -13,7 +13,6 @@ let ajout_deux_bis g = if g = 0 then f 2 0 else f (2+ 1) (g - 1)
 
 (*question 1.2*)
 (*
-
 1 -> rec 
 2 -> @ -> ::
 3 -> (match ...)
@@ -94,4 +93,4 @@ let f y z =
 let () = 
   printf "%d\n" (ajout_deux 4);;
   printf "%d\n" (ajout_deux_bis 4);;
-  printf "%d\n" (somme_derniers [] [])
+  printf "%d\n" (somme_derniers [3;5] [5;-1])

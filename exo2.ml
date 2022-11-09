@@ -1,4 +1,4 @@
-
+open Printf
 (* question 2.1*)
 
 (*
@@ -84,6 +84,20 @@ let rec map f = function
 
 (*    ('a -> bool) -> 'a arbre_bnaire -> bool )*)
 let rec forall_arbre p = function 
-| Feuille -> false 
+| Feuille -> true 
 | Noeud(a,g,d) -> (p a)&&(forall_arbre p g)&&(forall_arbre p d)
 
+let rec print = function
+| Feuille -> ()
+| Noeud(a,g,d) -> printf "%d " a; print g; print d;;
+
+(* test *)
+let a = Noeud(3,Noeud(4,Feuille,Feuille),Noeud(-1,Feuille, Feuille))
+let () = 
+  let b = map (fun a -> if a<0 then (-a) else a) a in 
+  printf "arbre a\n"; 
+  print a; 
+  printf "\narbre b\n";
+  print b; 
+  printf "\npositif: %b \n" (forall_arbre (fun a -> a>=0) b); 
+  printf "positif: %b \n" (forall_arbre (fun a -> a>=0) a); 

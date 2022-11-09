@@ -1,3 +1,5 @@
+open Printf
+
 type grid = int list list
 
 (* question 3.1 *)
@@ -19,12 +21,13 @@ let height = function
 wf_grid_exn : grid -> unit qui renvoie une exception
 si et seulement si l’argument donné n’est pas un grille bien formée.
 *)
+exception Mal_forme of string
 let rec wf_grid_exn g = 
   let height_g = height g in 
-  check_wf height_g g 
+  if (height_g != 0 )then (check_wf height_g g ) else ()
 and check_wf height = function
 | [] -> () 
-| l::g -> if ((List.length l)==height) then failwith "mal forme" else 
+| l::g -> if ((List.length l)!=height) then raise(Mal_forme "mal formee") else 
           (check_wf height g)
 
 
@@ -51,24 +54,29 @@ let rotate_up = function
 rotate_down : 'a list -> 'a list qui, appliquée à
 une liste non-vide [i0; i1; ...; in] donne la liste [in; i0; i1; ...; in−1]
 *)
-let rec rotate_down = function
-| [] -> failwith "liste vide "
-| a::[] -> [a]
-| a::b::l -> b::a::(rotate_down l)
+let rotate_down l = 
+  let rec rotate_down_bis r = function
+  | [] -> failwith "liste vide"
+  | a::[] -> a::r 
+  | a::l -> rotate_down_bis (r@[a]) l
+in rotate_down_bis [] l 
 
 
 
 
 (* question 3.7 *)
 let rec best_option l = 
-  let ld = rotate_down l in 
-  best_option_bis ld 
-and best_option_bis = function
+  let ld = rotate_down l in match ld with 
+  | [] | [_] -> ld 
+  | a::b::[] -> let maxall = max a b in [maxall;maxall]
+  | a::b::c::_ -> best_option_bis a b ld
+and best_option_bis hd hdd= function
 | [] -> [] 
-| [a] -> [a]
-| a::b::[] -> let maxall = max a b in [maxall;maxall]
-| a::b::c::ldd -> ((max (max a b) c )::(best_option_bis (b::c::ldd)) )
-and max a b = if a<b then a else b 
+| [a] -> [(max (max a hd) hdd )]
+| a::b::[] -> ((max (max a b) hd )::(best_option_bis hd hdd ([b])) )
+| a::b::c::ldd -> ((max (max a b) c )::(best_option_bis hd hdd (b::c::ldd)) )
+and max a b = if a<b then b else a
+
 
 
 (*  question 3.8 *)
@@ -94,7 +102,24 @@ let max_list = function
 (* question 3.10 *)
 let solve g = wf_grid_exn g; (max_list (sums g))
 
-
+let x = 0 
 (* tests*)
-
-(* les test a la fin %%% faire des teste pour les cas limites *)
+let print_list l = List.iter (fun a -> printf "%d " a) l; printf "\n"
+let a = [8;4;5;6;7]
+let () = 
+  printf "height = %d \n" (height g_example);;
+  try (wf_grid_exn g_example) with Mal_forme(s) -> printf "%s\n" s;;
+  printf "list a\n";;
+  print_list a;;
+  printf "rotate up\n";;
+  print_list (rotate_up a);;
+  printf "rotate down \n";;
+  print_list (rotate_down a);;
+  printf "best option\n";;
+  print_list a;;
+  print_list (best_option a);;
+  print_list ( sums g_example);;
+  printf "max a = %d\n" (max_list a);;
+  printf "solve g_exemple = %d\n" (solve g_example);;
+  
+  
