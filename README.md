@@ -1,4 +1,4 @@
 # tortue_ocaml
 
 
-# introduction 
+# game utility fubctions
