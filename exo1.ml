@@ -16,7 +16,7 @@ let ajout_deux_bis g = if g = 0 then f 2 0 else f (2+ 1) (g - 1)
 1 -> rec 
 2 -> @ -> ::
 3 -> (match ...)
-4 -> (match ...) %%%some other bug 
+4 -> (match ...)  
 *)
 let rec somme_derniers l1 l2 = match l1 with
   | [] -> (match l2 with

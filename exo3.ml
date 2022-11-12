@@ -66,13 +66,22 @@ in rotate_down_bis [] l
 
 (* question 3.7 *)
 
-let rec best_option l = 
+
+(* version optimisee de best option *)
+
+let rec best_option l = List.map2 max (List.map2  max (rotate_down l) (rotate_up l) ) l
+
+(* version simplifiee de best option *)
+let rec best_optionv2 l = 
   let ld = rotate_down l in 
   let lu = rotate_up l in 
   get_besto (l,ld,lu) 
 and get_besto = function
 | (a::ll,u::luu,d::ldd) -> ( max a (max u d))::get_besto (ll,luu,ldd)
 | _ -> []
+
+
+
 
 
 
