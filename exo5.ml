@@ -57,7 +57,7 @@ and evalpos_for n = function
   | Down -> in_terrain 0 (-n)
   | Left -> in_terrain (-n) 0
   | Right -> in_terrain  n 0
-  | Seq(l) -> List.fold_left (fun acc ec -> let x,y = (addcpl (acc,(evalpos_for  n ec))) in in_terrain x y ) (0,0) l
+  | Seq(l) -> List.fold_left (fun acc ec -> let x,y = (addcpl (acc,(evalpos_for  n ec))) in in_terrain x y ) (0,0) l 
   | For(c,m) -> evalpos_for m c 
 
 and addcpl = function
